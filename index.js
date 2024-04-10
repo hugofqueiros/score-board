@@ -20,6 +20,22 @@ class Scoreboard {
     constructor() {
         this.matches = [];
     }
+
+    startMatch(homeTeam, awayTeam) {
+
+    }
+
+    updateMatchScore(index, homeScore, awayScore) {
+
+    }
+
+    finishMatch(index) {
+
+    }
+
+    getSummary() {
+        return this.matches;
+    }
 }
 
 module.exports = { Match, Scoreboard };
