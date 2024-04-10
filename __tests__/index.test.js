@@ -138,4 +138,10 @@ describe('Scoreboard', () => {
         const emptyScoreboard = new Scoreboard();
         expect(emptyScoreboard.getSummary()).toEqual([]);
     });
+
+    test("should throw trying to update score of non-existent match", () => {
+        expect(() => scoreboard.updateMatchScore(0, 2, 1)).toThrow(
+            "Match not found"
+        );
+    });
 })

@@ -45,6 +45,11 @@ class Scoreboard {
 
     updateMatchScore(index, homeScore, awayScore) {
         const match = this.matches[index];
+
+        if (!match) {
+            throw new Error("Match not found");
+        }
+
         match.updateScore(homeScore, awayScore);
     }
 
