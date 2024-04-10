@@ -46,6 +46,42 @@ describe('Scoreboard', () => {
         scoreboard.startMatch("Mexico", "Canada");
         scoreboard.updateMatchScore(0, 0, 5);
 
+        // Adding a delay of 1 millisecond between starting matches
+        setTimeout(() => {
+            scoreboard.startMatch("Spain", "Brazil");
+            scoreboard.updateMatchScore(1, 10, 2);
+        }, 1);
+
+        setTimeout(() => {
+            scoreboard.startMatch("Germany", "France");
+            scoreboard.updateMatchScore(2, 2, 2);
+        }, 2);
+
+        setTimeout(() => {
+            scoreboard.startMatch("Uruguay", "Italy");
+            scoreboard.updateMatchScore(3, 6, 6);
+        }, 3);
+
+        setTimeout(() => {
+            scoreboard.startMatch("Argentina", "Australia");
+            scoreboard.updateMatchScore(4, 3, 1);
+
+            const summary = scoreboard.getSummary();
+            expect(summary).toEqual([
+                "1. Uruguay 6 - Italy 6",
+                "2. Spain 10 - Brazil 2",
+                "3. Mexico 0 - Canada 5",
+                "4. Argentina 3 - Australia 1",
+                "5. Germany 2 - France 2",
+            ]);
+
+        }, 4); // Wait until all matches are started and then check the summary
+    });
+
+    test("should get summary of matches when matches start concurrently", () => {
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.updateMatchScore(0, 0, 5);
+
         scoreboard.startMatch("Spain", "Brazil");
         scoreboard.updateMatchScore(1, 10, 2);
 
@@ -60,11 +96,11 @@ describe('Scoreboard', () => {
 
         const summary = scoreboard.getSummary();
         expect(summary).toEqual([
-            "1. Uruguay 6 - Italy 6",
-            "2. Spain 10 - Brazil 2",
+            "1. Spain 10 - Brazil 2",
+            "2. Uruguay 6 - Italy 6",
             "3. Mexico 0 - Canada 5",
-            "4. Argentina 3 - Australia 1",
-            "5. Germany 2 - France 2",
+            "4. Germany 2 - France 2",
+            "5. Argentina 3 - Australia 1",
         ]);
     });
 
