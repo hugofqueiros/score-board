@@ -72,6 +72,10 @@ describe('Scoreboard', () => {
         expect(scoreboard.matches.length).toBe(0);
     });
 
+    test("should throw trying finish non-existent match", () => {
+        expect(() => scoreboard.finishMatch(0)).toThrow("Match not found");
+    });
+
     test("should get summary of matches", () => {
         scoreboard.startMatch("Mexico", "Canada");
         scoreboard.updateMatchScore(0, 0, 5);

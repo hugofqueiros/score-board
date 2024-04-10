@@ -54,6 +54,10 @@ class Scoreboard {
     }
 
     finishMatch(index) {
+        if (!this.matches[index]) {
+            throw new Error("Match not found");
+        }
+
         this.matches.splice(index, 1);
     }
 
