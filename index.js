@@ -1,5 +1,9 @@
 class Match {
     constructor(homeTeam, awayTeam) {
+        if (!homeTeam || !awayTeam) {
+            throw new Error("Both home team and away team must be provided");
+        }
+    
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;

@@ -22,6 +22,19 @@ describe('Match', () => {
         match.updateScore(5, 0);
         expect(match.getTotalScore()).toBe(5);
     })
+
+    test("should throw if invalid input when creating match", () => {
+        expect(() => new Match()).toThrow(
+            "Both home team and away team must be provided"
+        );
+        expect(() => new Match("Porto")).toThrow(
+            "Both home team and away team must be provided"
+        );
+
+        expect(() => new Match(null, "Benfica")).toThrow(
+            "Both home team and away team must be provided"
+        );
+    });
 });
 
 describe('Scoreboard', () => {
