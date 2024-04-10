@@ -3,7 +3,7 @@ class Match {
         if (!homeTeam || !awayTeam) {
             throw new Error("Both home team and away team must be provided");
         }
-    
+
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
@@ -30,6 +30,15 @@ class Scoreboard {
     }
 
     startMatch(homeTeam, awayTeam) {
+        const doesMatchAlreadyExist = this.matches.some(
+            (match) =>
+                match.homeTeam === homeTeam && match.awayTeam === awayTeam
+        );
+
+        if (doesMatchAlreadyExist) {
+            throw new Error("Match already exists");
+        }
+
         const match = new Match(homeTeam, awayTeam);
         this.matches.push(match);
     }

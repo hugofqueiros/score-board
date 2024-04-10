@@ -55,12 +55,19 @@ describe('Scoreboard', () => {
     });
 
     test("should start a match", () => {
-        scoreboard.startMatch("Home Team", "Away Team");
+        scoreboard.startMatch("Porto", "Sporting");
         expect(scoreboard.matches.length).toBe(1);
     });
 
+    test("shoudl throw if a game with the same teams is ongoing (is present in the collection)", () => {
+        scoreboard.startMatch("Porto", "Sporting");
+        expect(() => scoreboard.startMatch("Porto", "Sporting")).toThrow(
+            "Match already exists"
+        );
+    });
+
     test("should finish match", () => {
-        scoreboard.startMatch("Home Team", "Away Team");
+        scoreboard.startMatch("Porto", "Sporting");
         scoreboard.finishMatch(0);
         expect(scoreboard.matches.length).toBe(0);
     });
@@ -69,7 +76,7 @@ describe('Scoreboard', () => {
         scoreboard.startMatch("Mexico", "Canada");
         scoreboard.updateMatchScore(0, 0, 5);
 
-        // Adding a delay of 1 millisecond between starting matches
+        // Adding a delay of 1 millisecond between starting matches to avoid concurrency
         setTimeout(() => {
             scoreboard.startMatch("Spain", "Brazil");
             scoreboard.updateMatchScore(1, 10, 2);
