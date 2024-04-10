@@ -22,19 +22,35 @@ class Scoreboard {
     }
 
     startMatch(homeTeam, awayTeam) {
-
+        const match = new Match(homeTeam, awayTeam);
+        this.matches.push(match);
     }
 
     updateMatchScore(index, homeScore, awayScore) {
-
+        const match = this.matches[index];
+        match.updateScore(homeScore, awayScore);
     }
 
     finishMatch(index) {
-
+        this.matches.splice(index, 1);
     }
 
     getSummary() {
-        return this.matches;
+        if (this.matches.length === 0) {
+            return [];
+        }
+        return this.matches
+            .sort(
+                (a, b) =>
+                    b.getTotalScore() - a.getTotalScore() ||
+                    b.startTime - a.startTime
+            )
+            .map(
+                (match, index) =>
+                    `${index + 1}. ${match.homeTeam} ${match.homeScore} - ${
+                        match.awayTeam
+                    } ${match.awayScore}`
+            );
     }
 }
 
