@@ -35,6 +35,16 @@ describe('Match', () => {
             "Both home team and away team must be provided"
         );
     });
+
+    test("should invalidate input when updating score", () => {
+        const match = new Match("Home Team", "Away Team");
+        expect(() => match.updateScore(null, 1)).toThrow(
+            "Both home score and away score must be numbers"
+        );
+        expect(() => match.updateScore(2, "Porto")).toThrow(
+            "Both home score and away score must be numbers"
+        );
+    });
 });
 
 describe('Scoreboard', () => {

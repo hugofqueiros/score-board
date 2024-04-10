@@ -12,6 +12,10 @@ class Match {
     }
 
     updateScore(homeScore, awayScore) {
+        if (typeof homeScore !== "number" || typeof awayScore !== "number") {
+            throw new Error("Both home score and away score must be numbers");
+        }
+
         this.homeScore = homeScore;
         this.awayScore = awayScore;
     }
