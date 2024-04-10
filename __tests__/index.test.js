@@ -59,7 +59,7 @@ describe('Scoreboard', () => {
         expect(scoreboard.matches.length).toBe(1);
     });
 
-    test("shoudl throw if a game with the same teams is ongoing (is present in the collection)", () => {
+    test("should throw if a game with the same teams is ongoing (is present in the collection)", () => {
         scoreboard.startMatch("Porto", "Sporting");
         expect(() => scoreboard.startMatch("Porto", "Sporting")).toThrow(
             "Match already exists"
