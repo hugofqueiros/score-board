@@ -16,9 +16,10 @@ class Match {
         return this.homeScore + this.awayScore;
     }
 }
-
 class Scoreboard {
     constructor() {
-
+        this.matches = [];
     }
 }
+
+module.exports = { Match, Scoreboard };
